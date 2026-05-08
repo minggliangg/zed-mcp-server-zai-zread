@@ -1,0 +1,58 @@
+# Z.AI Zread MCP Server for Zed
+
+A Zed extension that connects Zed's AI assistant to Z.AI's Zread MCP server. It provides GitHub repository documentation, code structure, and file access through Zed's context server integration.
+
+## Features
+
+- Reads GitHub repository documentation and source structure
+- Helps inspect repository files through Z.AI's remote MCP endpoint
+- Passes your Z.AI API key as a bearer token
+- Uses `mcp-remote` to bridge Zed's stdio MCP transport to the remote HTTP server
+- Requires no local MCP server implementation
+
+## Installation
+
+1. Clone or download this repository.
+2. In Zed, run **Install Development Extension** from the command palette.
+3. Select this project directory.
+4. Zed will build and install the extension.
+
+## Configuration
+
+This extension requires a Z.AI API key.
+
+1. Get your API key from [Z.AI Console](https://z.ai/manage-apikey/apikey-list).
+2. Add the API key to your Zed `settings.json`:
+
+```json
+{
+  "context_servers": {
+    "mcp-server-zai-zread": {
+      "settings": {
+        "zai_api_key": "your-api-key"
+      }
+    }
+  }
+}
+```
+
+## Available Tools
+
+The available tools are provided by Z.AI's Zread MCP server and exposed to Zed through this extension.
+
+## How It Works
+
+This extension uses `mcp-remote` to bridge Zed's stdio-based MCP transport to Z.AI's remote HTTP endpoint. When configured, it sends the API key as an `Authorization: Bearer` header.
+
+## Development
+
+```bash
+cargo check
+cargo build --target wasm32-wasip1 --release
+```
+
+Install as a development extension in Zed with **Install Development Extension** and select the project root.
+
+## License
+
+Apache-2.0 - See [LICENSE](LICENSE) for details.
